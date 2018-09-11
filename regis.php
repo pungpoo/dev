@@ -1,3 +1,7 @@
+<?php
+   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +21,7 @@
                     <h5 class="card-header text-center">Registration</h5>
                     <div class="card-body">
 
-                    <form class="form" id="frmRegis" method="post" action="">
+                    <form class="form" id="frmRegis" method="post" action="php/createMember.php">
                        
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
@@ -58,16 +62,19 @@
                             <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-key"></i></div>
                             </div>
-                            <input type="text" class="form-control" id="password" name="password"  placeholder="Password">
+                            <input type="password" class="form-control" id="password" name="password"  placeholder="Password">
                         </div>
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-key"></i></div>
                             </div>
-                            <input type="text" class="form-control" id="conf_password" name="conf_password" placeholder="Comfirm-Password">
+                            <input type="password" class="form-control" id="conf_password" name="conf_password" placeholder="Comfirm-Password">
+                        </div>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LdJqW8UAAAAABGqb23lwkxLdJh6gn6eonylnACm"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary mb-2  btn-block">OK</button>
+                        <button type="submit" name="submit" id="submit" disabled class="btn btn-primary mb-2  btn-block">Regis</button>
                         <span class="float-right">Login <a href="#">Click</a></span>
                         </form>
 
@@ -81,6 +88,7 @@
     <script src="node_modules/popper.js/dist/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         //frmRegis
         $( document ).ready(function(){
@@ -94,8 +102,23 @@
                     },
                     phone: {
                         required: true,
-                        number: true
+                        number: true,
+                        maxlength: 20
+                    },
+                    username: {
+                        required: true,
+                        minlength: 4
+                    },
+                    password: {
+                        required: true,
+                        minlength: 4
+                    },
+                    conf_password: {
+                        required: true,
+                        minlength: 4,
+                        equalTo: '#password'
                     }
+
                 },
                 messages:{
                     fname:'โปรดกรอกชื่อ',
@@ -106,7 +129,21 @@
                     },
                     phone: {
                         required: 'โปรดระบุ' ,
-                        number: 'โปรดกรอกตัวเลขเท่านั้น'
+                        number: 'โปรดกรอกตัวเลขเท่านั้น',
+                        minlength: 'โปรดกรอกตัวเลขไม่เกิน 20 ตัวอักษร'
+                    },
+                    username: {
+                        required: 'โปรดกรอก Usermane',
+                        minlength: 'โปรดกรอก Usermane มากกว่า 4 ตัวอักษร'
+                    },
+                    password: {
+                        required: 'โปรดกรอก Password',
+                        minlength: 'โปรดกรอก Usermane มากกว่า 4 ตัวอักษร'
+                    },
+                    conf_password: {
+                        required: 'โปรดกรอก Password',
+                        minlength: 'โปรดกรอก Usermane มากกว่า 4 ตัวอักษร',
+                        equalTo: 'ยืนยัน Password ไม่ถูกต้อง'
                     }
                 },
                 errorElement: 'div',
@@ -122,6 +159,12 @@
                 },
             });
         })
+
+        function recaptchaCallback(){
+            $('#submit').removeAttr('disabled');
+        }
+
+        
     </script>
 </body>
 </html>
