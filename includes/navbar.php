@@ -6,22 +6,29 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
+
+            <?php if(isset($_SESSION['id'])){ ?>
+            <li class="nav-item dropdown ml-auto">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Ohshit
+                   
+                    <?php echo $_SESSION['name']; ?>
+                    <img src="assets/images/<?php echo $_SESSION['image']?>" class="rounded-circle"  width = "30px">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="profile.php">Profile</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="logout.php">LogOut</a>
+                <a class="dropdown-item" href="php/logout.php">LogOut</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="btn btn-success" href="login.php">Login</a>
+            <?php }else{ ?>
+
+            <li class="nav-item ml-auto">
+                <a class="btn btn-success mt-1 m-md-1 px-4" href="login.php">Login</a>
             </li>
-            <li class="nav-item">
-                <a class="btn btn-info" href="regis.php">Regis</a>
+            <li class="nav-item ml-auto">
+                <a class="btn btn-info mt-1 m-md-1 px-3" href="regis.php">Regis</a>
             </li>
+            <?php } ?>
         </ul>
     </div>
 </nav>

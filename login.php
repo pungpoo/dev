@@ -17,13 +17,14 @@
                     <h5 class="card-header text-center">Login</h5>
                     <div class="card-body">
 
-                    <form class="form">
+                    <form class="form" method="post" action="php/checkLogin.php">
+
                         <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
                         <div class="input-group mb-2 mr-sm-2">
                             <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-user"></i></div>
                             </div>
-                            <input type="text" class="form-control" id="username" placeholder="Username">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                         </div>
 
                         <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
@@ -31,7 +32,7 @@
                             <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-key"></i></div>
                             </div>
-                            <input type="text" class="form-control" id="password" placeholder="Password">
+                            <input type="text" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                         <button type="submit" class="btn btn-primary mb-2  btn-block">Login</button>
                         <span class="float-right">Regis <a href="#">Click</a></span>

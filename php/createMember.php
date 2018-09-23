@@ -14,10 +14,29 @@
             $check_user  = $conn->query($check_sql) or die($conn->error);
 
             if(!$check_user->num_rows){
-                
+                $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $sql_insert = "INSERT INTO `tbl_member` (`name`, `lastname`, `email`, `phone`, `username`, `password`, `create_at`)
+                             VALUES ('".$_POST['fname']."', 
+                                     '".$_POST['lname']."', 
+                                     '".$_POST['mail']."', 
+                                     '".$_POST['phone']."', 
+                                     '".$_POST[username]."', 
+                                     '".$hashed_password."', 
+                                     '".date("Y-m-d")."'); 
+                                     ";
+                $result = $conn->query($sql_insert) or die ($conn->error);
+                if ($result) {
+                    echo "<script> alert('สมัครสมาชิก สำเร็จ'); </script>";
+                    redirect('index');
+                }else{
+                    echo "<script> alert('สมัครสมาชิกไม่สำเร็จ'); </script>";
+                    redirect('regis');
+                }
+
+
             }else {
                 echo "<script> alert('User ซ้ำ'); </script>";
-                header('Refresh:0; url=../regis.php');
+                redirect('regis');
             }
 
 
@@ -25,10 +44,14 @@
 
         }else{
             echo "<script> alert('Verification Failed'); </script>";
-            header('Refresh:0; url=../regis.php');
+            redirect('regis');
         }
 
     }else{
-        header('Refresh:0; url=../regis.php');
+        redirect('regis');
+    }
+
+    function redirect($path) {
+        header('Refresh:0; url=../'.$path.'.php');
     }
 ?>

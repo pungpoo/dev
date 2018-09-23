@@ -122,7 +122,7 @@
                 },
                 messages:{
                     fname:'โปรดกรอกชื่อ',
-                    fname:'โปรดกรอกนามสกุล',
+                    lname:'โปรดกรอกนามสกุล',
                     email: {
                         required: 'โปรดกรอก Email',
                         email: 'โปรดกรอก Email ให้ถูกต้อง'
@@ -156,7 +156,7 @@
                 },
                 unhighlight: function (element, errorClass, validClass){
                     $( element ).addClass( 'is-valid' ).removeClass( 'is-invalid' )
-                },
+                }
             });
         })
 

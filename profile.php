@@ -1,3 +1,20 @@
+<?php 
+   
+    require_once('php/connect.php');
+    
+    if(!isset($_SESSION['id'])){
+        header('location:login.php');
+    }
+    $sql = "SELECT * FROM tbl_member WHERE id = '".$_SESSION['id']."' ";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    if (!$result->num_rows) {
+        header('location:login.php');
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +38,9 @@
     </style>
 </head>
 <body>
-<?php include_once('includes/navbar.php');?>
+    <?php 
+        include_once('includes/navbar.php');
+    ?>
 
     <section class="jumbotron jumbotron-fluid text-center">
         <div class="container my-5 my-sm-1">
@@ -32,40 +51,40 @@
     <section class="container my-3">
         <div class="row">
             <div class="col-12 profile-top">
-                <img src="assets/images/user.png" class="my-3 img-profile rounded-circle img-thumbnail" alt="Image Profile">
+                <img src="assets/images/<?php echo $row['image']; ?>" class="my-3 img-profile rounded-circle img-thumbnail" alt="Image Profile">
 
                 <div class="card">
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="username">UserName</label>
-                                <input type="text" class="form-control" id="username" value="Tum" disabled>
+                                <input type="text" class="form-control" id="username" value=" <?php echo $row['username'] ; ?>" disabled>
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="fname">ชื่อ</label>
-                                <input type="text" class="form-control" id="fname" value="Tum"  disabled>
+                                <input type="text" class="form-control" id="fname" value="<?php echo $row['name'] ; ?>"  disabled>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="lname">สกุล</label>
-                                <input type="text" class="form-control"  id="lname" value="Tum"  disabled>
+                                <input type="text" class="form-control"  id="lname" value="<?php echo $row['lastname'] ; ?>"  disabled>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="mail">E-Mail</label>
-                                <input type="email" class="form-control"  id="mail" value="Tum"  disabled>
+                                <input type="email" class="form-control"  id="mail" value="<?php echo $row['email'] ; ?>"  disabled>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control"  id="phone" value="Tum"  disabled>
+                                <input type="text" class="form-control"  id="phone" value="<?php echo $row['phone'] ; ?>"  disabled>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="adds">ที่อยู่</label>
-                            <textarea class="form-control"  id="adds" rows="5" disabled>กทม.</textarea>
+                            <textarea class="form-control"  id="adds" rows="5" disabled><?php echo $row['address'] ; ?></textarea>
                         </div>
 
-                        <a href="edit.php" class="btn btn-warning float-right"> EDIT </a>
+                        <a href="profile-edit.php" class="btn btn-warning float-right"> EDIT </a>
                         
                     </div>
                 </div>

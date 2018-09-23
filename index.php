@@ -1,3 +1,4 @@
+<?php   session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,11 @@
     
 </head>
 <body>
-<?php include_once('includes/navbar.php');?>
+<?php 
+      
+      include_once('includes/navbar.php');
+  
+?>
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
             <h1 class="display-1">Fucking Web</h1>

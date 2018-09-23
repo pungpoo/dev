@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     $conn = new mysqli("localhost","root","BbilkB414148","db_dev");
     $conn->set_charset("utf8");
     if ($conn->connect_errno) {
