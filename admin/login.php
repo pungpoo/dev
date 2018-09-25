@@ -1,8 +1,26 @@
 <?php 
-  session_start();
+  require_once('../php/connect.php');
   if (isset($_POST['submit'])) {
-    $_SESSION['authen_id'] = 1; 
-    header('Location: pages/dashboard');
+
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $conn->real_escape_string($_POST['password']);
+
+    $sql = "SELECT * FROM tbl_admin WHERE username = '".$username."' AND password = '".$password."' ";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    if( !empty($row) ){
+      $_SESSION['authen_id'] = $row['id'];
+      $_SESSION['fname'] = $row['fname'];
+      $_SESSION['lname'] = $row['lname'];
+
+      header('Location: pages/dashboard');
+    }else{
+      echo '<script> alert("Login Fail") </script>';
+      header('Refresh:0; url=login.php');
+    }
+
+   
   }
 ?>
 <!DOCTYPE html>
@@ -49,13 +67,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fas fa-lock"></i></span>
             </div>
-            <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+            <input type="password" class="form-control"  name="password"  placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
         </div>
 
         <div class="row">

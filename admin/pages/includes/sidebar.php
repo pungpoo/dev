@@ -34,7 +34,7 @@ $name = $link_array[count($link_array) - 2];
           <img src="../../dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">User Admin</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['fname'].' '. $_SESSION['lname']; ?></a>
         </div>
       </div>
 
